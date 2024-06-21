@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
 		if(choose == 1)
 		{
 			player = new Player();
-			game->SetUpPlayer();
+			game->SetUpPlayer(player);
 		}
 		else if(choose == 3)
 		{
@@ -23,6 +23,6 @@ int main(int argc, char** argv) {
 
 	delete game;
 	if(player != nullptr)
-		delete player;
+		delete player;	
 	return 0;
 }
