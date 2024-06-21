@@ -26,18 +26,24 @@ bool Game::OutRange(int a, int b)
     return choose < a || choose > b;
 }
 
-bool Game::SetUpPlayer()
+bool Game::SetUpPlayer(Player *player)
 {
     std::ifstream pFile;
     pFile.open(playerFile);
     if(!pFile)
     {
-        std::cout << "Mo file khong thanh cong\n";
         pFile.close();
+        std::cout << "Mo file khong thanh cong\n";
         return false;
     }
 
-    
+    do 
+    {
+        std::string name;
+        std::getline(std::cin >> std::ws, name);
+        player->setName(name);
+    }
+    while(player->getName().empty());
 
     pFile.close();
 }

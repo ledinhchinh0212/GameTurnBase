@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Player.hpp"
 
 class Game
 {
@@ -12,5 +13,5 @@ public:
     Game();
     bool OutRange(int a, int b);
     int InitGame();
-    bool SetUpPlayer();
+    bool SetUpPlayer(Player *player);
 };

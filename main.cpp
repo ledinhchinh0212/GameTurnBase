@@ -22,5 +22,7 @@ int main(int argc, char** argv) {
 	}
 
 	delete game;
+	if(player != nullptr)
+		delete player;
 	return 0;
 }

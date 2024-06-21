@@ -13,4 +13,6 @@ protected:
     double lifeSteel;
 public:
     Entity() {}
+    std::string getName() const { return name; }
+    void setName(std::string name) { this->name = name; }
 };
