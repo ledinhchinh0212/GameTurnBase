@@ -4,7 +4,7 @@
 #include <string>
 #include <sstream>
 #include <climits>
-#include "Player.hpp"
+#include "Entity/Player.hpp"
 #include "Error/Error.hpp"
 
 class Game
@@ -15,6 +15,7 @@ private:
 public:
     Game();
     bool OutRange(int a = INT_MIN, int b = INT_MAX);
+    bool InRange(int a = INT_MIN, int b = INT_MAX);
     int InitGame();
     bool SetUpPlayer(Player *player);
     int MenuStartGame();

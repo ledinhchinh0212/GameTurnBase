@@ -22,8 +22,9 @@ void Player::getPlayerFileInFo()
     pFile >> attackSpeed;
     pFile >> critRate;
     pFile >> lifeSteel;
+    pFile >> level;
 
-    pFile.close();
+    pFile.close();    
 }
 
 void Player::Show()
@@ -34,6 +35,7 @@ void Player::Show()
     std::cout << attackSpeed << "\n";
     std::cout << critRate << "\n";
     std::cout << lifeSteel << "\n";
+    std::cout << level << "\n";
 }
 
 void Player::ChangePropertyPlayer(int enumPlayer, std::string property)
@@ -70,4 +72,16 @@ void Player::ChangePropertyPlayer(int enumPlayer, std::string property)
     }
 
     pFileOut.close();
+
+    getPlayerFileInFo();
+}
+
+void Player::VisibleName()
+{
+    std::cout << "Name: ";
+    if(name == "none")
+    {
+        std::cout << "The player has not a name\n";
+    }
+    else std::cout << name << "\n";
 }

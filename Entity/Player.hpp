@@ -6,6 +6,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <algorithm>
 
 class Player : public Entity
 {
@@ -14,4 +15,5 @@ public:
     void getPlayerFileInFo();
     void Show();
     void ChangePropertyPlayer(int, std::string);
+    void VisibleName();
 };

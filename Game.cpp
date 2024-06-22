@@ -12,7 +12,7 @@ int Game::InitGame()
         std::cout << "4. Exit\n";
 
         std::cin >> choose;
-        if(!OutRange(1, 4))
+        if(InRange(1, 4))
         {
             return choose;
         }
@@ -26,6 +26,11 @@ bool Game::OutRange(int a, int b)
     return choose < a || choose > b;
 }
 
+bool Game::InRange(int a, int b)
+{
+    return !OutRange(a, b);
+}
+
 bool Game::SetUpPlayer(Player *player)
 {
     std::string name;
@@ -36,7 +41,7 @@ bool Game::SetUpPlayer(Player *player)
         {
            player->ChangePropertyPlayer(NAME, name);
         }
-        else std::cout << "The name can not be empty\n";
+        else Error::ErrorConsole(MESSAGE, "The name can not be empty");
     }
     while(name.empty());
 
@@ -47,18 +52,17 @@ int Game::MenuStartGame()
 {
     std::cout << "1. Vuot Ai\n";
     std::cout << "2. Map Can Quet\n";
-    std::cout << "3. Nhien Vu Hang Ngay\n";
+    std::cout << "3. Nhien Vu\n";
     std::cout << "4. Thong tin nguoi choi\n";
     std::cout << "5. Thoat\n";
 
     do
     {
         std::cin >> choose;
-        if(!OutRange(1, 5))
+        if(InRange(1, 5))
         {
             return choose;
         }
         else Error::ErrorConsole(INVALID_INPUT);
     } while (OutRange(1, 5));
-    
 }

@@ -11,6 +11,7 @@ protected:
     int attackSpeed;
     double critRate;
     double lifeSteel;
+    int level;
 public:
     Entity() {}
     std::string getName() const { return name; }
@@ -19,10 +20,12 @@ public:
     int getAttackSpeed() const { return attackSpeed; }
     double getCritRate() const { return critRate; }
     double getLifeSteel() const { return lifeSteel; }
+    int getLevel() const { return level; }
     void setName(std::string name) { this->name = name; }
     void setHP(double HP) { this->HP = HP; }
     void setRangeDamage(std::pair<int, int> rangeDamage) { this->rangeDamage = rangeDamage; }
     void setAttackSpeed(int attackSpeed) { this->attackSpeed = attackSpeed; }
     void setCritRate(double critRate) { this->critRate = critRate; }
     void setLifeSteel(double lifeSteel) { this->lifeSteel = lifeSteel; }
+    void setLevel(int level) { this->level = level; }
 };

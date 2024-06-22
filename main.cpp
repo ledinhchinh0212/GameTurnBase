@@ -1,20 +1,19 @@
 #include <iostream>
 #include "Game.hpp"
-#include "Player.hpp"
-#include "EnumPlayer.hpp"
+#include "Entity/Player.hpp"
+#include "Entity/EnumPlayer.hpp"
 
 int main(int argc, char** argv) {
 	Game *game = new Game();
-	Player *player = nullptr;
+	Player *player = new Player(); // get the information about the file
 
 	while(true)
 	{
+		player->VisibleName();
 		int choose = game->InitGame();
 		if(choose == 1)
 		{
-			player = new Player();
 			game->SetUpPlayer(player);
-			// player->Show();
 		}
 		else if(choose == 2)
 		{
@@ -27,7 +26,6 @@ int main(int argc, char** argv) {
 	}
 
 	delete game;
-	if(player != nullptr)
-		delete player;	
+	delete player;	
 	return 0;
 }

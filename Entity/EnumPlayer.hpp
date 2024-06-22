@@ -9,4 +9,5 @@ enum PlayerParam
     ATTACK_SPEED = 4,
     CRIT_RATE = 5,
     LIFE_STEEL = 6,
+    LEVEL = 7,
 };
