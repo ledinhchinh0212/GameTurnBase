@@ -28,22 +28,17 @@ bool Game::OutRange(int a, int b)
 
 bool Game::SetUpPlayer(Player *player)
 {
-    std::ifstream pFile;
-    pFile.open(playerFile);
-    if(!pFile)
-    {
-        pFile.close();
-        std::cout << "Mo file khong thanh cong\n";
-        return false;
-    }
-
+    std::string name;
     do 
     {
-        std::string name;
         std::getline(std::cin >> std::ws, name);
-        player->setName(name);
+        if(!name.empty())
+        {
+           player->ChangePropertyPlayer(NAME, name);
+        }
+        else std::cout << "The name can not be empty\n";
     }
-    while(player->getName().empty());
-
-    pFile.close();
+    while(name.empty());
+    
+    std::cout << "Nhap ten nguoi dung thanh cong\n";
 }

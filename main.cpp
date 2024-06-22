@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Game.hpp"
 #include "Player.hpp"
+#include "EnumPlayer.hpp"
 
 int main(int argc, char** argv) {
 	Game *game = new Game();
@@ -13,11 +14,11 @@ int main(int argc, char** argv) {
 		{
 			player = new Player();
 			game->SetUpPlayer(player);
+			// player->Show();
 		}
 		else if(choose == 3)
 		{
-			delete game;
-			return 0;
+			break;
 		}
 	}
 

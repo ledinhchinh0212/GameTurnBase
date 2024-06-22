@@ -25,3 +25,49 @@ void Player::getPlayerFileInFo()
 
     pFile.close();
 }
+
+void Player::Show()
+{
+    std::cout << name << "\n";
+    std::cout << HP << "\n";
+    std::cout << rangeDamage.first << " " << rangeDamage.second << "\n";
+    std::cout << attackSpeed << "\n";
+    std::cout << critRate << "\n";
+    std::cout << lifeSteel << "\n";
+}
+
+void Player::ChangePropertyPlayer(int enumPlayer, std::string property)
+{
+    const std::string playerFile = "playerFile.txt";
+    
+    std::ifstream pFileIn(playerFile);
+    if(!pFileIn)
+    {
+        pFileIn.close();
+        throw std::runtime_error("Can not open the file " + playerFile);
+    }
+
+    std::vector<std::string> lines;
+    std::string line;
+    while(std::getline(pFileIn, line))
+    {
+        lines.push_back(line);
+    }  
+    pFileIn.close();
+
+    lines[enumPlayer] = property; // changes the property's player in the line - 1
+
+    std::ofstream pFileOut(playerFile);
+    if(!pFileOut)
+    {
+        pFileOut.close();
+        throw std::runtime_error("Can not open the file " + playerFile);
+    }
+
+    for(const std::string &x : lines)
+    {
+        pFileOut << x << "\n";
+    }
+
+    pFileOut.close();
+}
