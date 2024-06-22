@@ -1,4 +1,4 @@
-#include "Error.hpp"
+#include "ErrorNoti.hpp"
 
 void Error::ErrorConsole(int num, std::string others)
 {

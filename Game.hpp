@@ -10,7 +10,7 @@
 #include <chrono>
 #include <atomic>
 #include "Entity/Player.hpp"
-#include "Error/Error.hpp"
+#include "Error-Notification/ErrorNoti.hpp"
 #include "Entity/NPC.hpp"
 #include "Entity/Spider.hpp"
 #include "Entity/Entity.hpp"
