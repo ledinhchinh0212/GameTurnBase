@@ -46,4 +46,5 @@ public:
     void setLevel(double level) { this->level = level; }
 
     virtual double Damage() const;
+    bool CheckDead() const;
 };

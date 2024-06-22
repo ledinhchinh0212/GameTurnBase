@@ -43,3 +43,8 @@ double Entity::Damage() const
     } 
     return damageRandom;   
 }
+
+bool Entity::CheckDead() const
+{
+    return HP <= 0;
+}

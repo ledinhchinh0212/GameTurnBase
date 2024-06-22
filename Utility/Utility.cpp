@@ -13,3 +13,12 @@ bool RandomDouble(double block)
 {
     return RandomDouble(0, 1) <= block; // crit rate effect
 }
+
+std::string FormatTime(int seconds)
+{
+    std::stringstream ss;
+    ss << seconds / 3600 << ":";
+    ss << (seconds % 3600) / 60 << ":";
+    ss << seconds % 60;
+    return ss.str();
+}

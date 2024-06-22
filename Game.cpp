@@ -53,7 +53,7 @@ int Game::MenuStartGame()
 {
     std::cout << "1. Vuot Ai\n";
     std::cout << "2. Map Can Quet\n";
-    std::cout << "3. Nhien Vu\n";
+    std::cout << "3. Nhiem Vu\n";
     std::cout << "4. Trang bi\n";
     std::cout << "5. Thong tin nguoi choi\n";
     std::cout << "6. Thoat\n";
@@ -99,6 +99,7 @@ void Game::ClearMapCheckFile()
                 npc.push(new Spider());
             }    
         }
+        ClearMapStart(npc); 
     }
 
     fileIn.close();
@@ -106,8 +107,13 @@ void Game::ClearMapCheckFile()
 
 std::atomic<bool> running(true);
 
-void Game::ClearMapStart(std::queue<NPC*> &npc)
+void Game::GameStart(std::queue<NPC*>& npc)
 {
+   while(running)
+   {
+       std::cout << "running\n";
+       std::this_thread::sleep_for(std::chrono::milliseconds(250));
+   }
 }
 
 void Game::CountTime(int seconds)
@@ -115,5 +121,17 @@ void Game::CountTime(int seconds)
     while(seconds > 0 && running)
     {
         std::this_thread::sleep_for(std::chrono::seconds(1));
+        seconds--;
+        std::cout << "Time left: " << FormatTime(seconds) << "\n";
     }
+    running = false;
+}
+
+void Game::ClearMapStart(std::queue<NPC*> &npc)
+{
+    std::thread countTimeThread(Game::CountTime, this, 90);
+    std::thread gameStartThread(Game::GameStart, this, std::ref(npc));
+
+    countTimeThread.join();
+    gameStartThread.join();
 }

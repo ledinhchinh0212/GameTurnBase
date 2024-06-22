@@ -35,4 +35,6 @@ public:
     void ClearMapStart(std::queue<NPC*>&);
 
     void CountTime(int seconds);
+
+    void GameStart(std::queue<NPC*>&);
 };
