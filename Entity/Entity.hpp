@@ -1,6 +1,9 @@
-#pragma once
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
 #include <string>
 #include <utility>
+#include "../Weapon/Weapon.hpp"
+#include "../Armor/Armor.hpp"
 
 class Entity
 {
@@ -11,21 +14,30 @@ protected:
     int attackSpeed;
     double critRate;
     double lifeSteel;
-    int level;
+    double level;
+    const int MAX;
+
+    Weapon **weapon;
+    Armor **armor;
+
 public:
-    Entity() {}
+    Entity();
+    virtual ~Entity();
+
     std::string getName() const { return name; }
     double getHP() const { return HP; }
     std::pair<int, int> getRangeDamage() const { return rangeDamage; }
     int getAttackSpeed() const { return attackSpeed; }
     double getCritRate() const { return critRate; }
     double getLifeSteel() const { return lifeSteel; }
-    int getLevel() const { return level; }
+    double getLevel() const { return level; }
     void setName(std::string name) { this->name = name; }
     void setHP(double HP) { this->HP = HP; }
     void setRangeDamage(std::pair<int, int> rangeDamage) { this->rangeDamage = rangeDamage; }
     void setAttackSpeed(int attackSpeed) { this->attackSpeed = attackSpeed; }
     void setCritRate(double critRate) { this->critRate = critRate; }
     void setLifeSteel(double lifeSteel) { this->lifeSteel = lifeSteel; }
-    void setLevel(int level) { this->level = level; }
+    void setLevel(double level) { this->level = level; }
 };
+
+#endif

@@ -24,6 +24,14 @@ void Player::getPlayerFileInFo()
     pFile >> lifeSteel;
     pFile >> level;
 
+    int size;
+    pFile >> size;
+    for(int i = 0; i < size; i++)
+    {
+        std::string ID;
+        pFile >> ID;
+    }
+
     pFile.close();    
 }
 
