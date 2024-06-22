@@ -11,4 +11,6 @@ Spider::Spider() : NPC()
     attackSpeed = 1;
     critRate = 0.25;
     lifeSteel = 0.109;
+
+    MAX_HP = HP;
 };

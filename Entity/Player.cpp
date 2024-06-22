@@ -17,7 +17,7 @@ void Player::getPlayerFileInFo()
     }
     
     std::getline(pFile, name);
-    pFile >> HP;
+    pFile >> HP; MAX_HP = HP;
     pFile >> rangeDamage.first >> rangeDamage.second;
     pFile >> attackSpeed;
     pFile >> critRate;

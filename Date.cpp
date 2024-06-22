@@ -13,7 +13,7 @@ Date Date::RealDate()
 
     int day = localTime->tm_mday;
     int month = localTime->tm_mon + 1; // (0 - 11)
-    int year = localTime->tm_year + 1900; // tm_year -> 1900 (bat dau tu 1900s)
+    int year = localTime->tm_year + 1900; // tm_year -> 1900 (bat dau tu 1900s :v)
     return Date(day, month, year);
 }
 

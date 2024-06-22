@@ -21,7 +21,9 @@ protected:
     double critRate;
     double lifeSteel;
     double level;
+
     const int MAX;
+    const double MAX_HP;
 
     Weapon **weapon;
     Armor **armor;
