@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include <thread>
 
 Game::Game() : playerFile("playerFile.txt"), NPC_Quest("NPC_Quest.txt") {}
 
@@ -103,7 +104,16 @@ void Game::ClearMapCheckFile()
     fileIn.close();
 }
 
+std::atomic<bool> running(true);
+
 void Game::ClearMapStart(std::queue<NPC*> &npc)
 {
-    
+}
+
+void Game::CountTime(int seconds)
+{
+    while(seconds > 0 && running)
+    {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
 }

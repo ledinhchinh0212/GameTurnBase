@@ -33,4 +33,6 @@ public:
     
     void ClearMapCheckFile();
     void ClearMapStart(std::queue<NPC*>&);
+
+    void CountTime(int seconds);
 };
