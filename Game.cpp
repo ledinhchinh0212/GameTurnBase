@@ -1,6 +1,6 @@
 #include "Game.hpp"
 
-Game::Game() : playerFile("playerFile.txt") {}
+Game::Game() : playerFile("playerFile.txt"), NPC_Quest("NPC_Quest.txt") {}
 
 int Game::InitGame()
 {
@@ -31,7 +31,7 @@ bool Game::InRange(int a, int b)
     return !OutRange(a, b);
 }
 
-bool Game::SetUpPlayer(Player *player)
+void Game::SetUpPlayer(Player *player)
 {
     std::string name;
     do 
@@ -53,8 +53,9 @@ int Game::MenuStartGame()
     std::cout << "1. Vuot Ai\n";
     std::cout << "2. Map Can Quet\n";
     std::cout << "3. Nhien Vu\n";
-    std::cout << "4. Thong tin nguoi choi\n";
-    std::cout << "5. Thoat\n";
+    std::cout << "4. Trang bi\n";
+    std::cout << "5. Thong tin nguoi choi\n";
+    std::cout << "6. Thoat\n";
 
     do
     {
@@ -65,4 +66,44 @@ int Game::MenuStartGame()
         }
         else Error::ErrorConsole(INVALID_INPUT);
     } while (OutRange(1, 5));
+}
+
+void Game::ClearMapCheckFile()
+{
+    std::ifstream fileIn(NPC_Quest);
+    if(!fileIn)
+    {
+        fileIn.close();
+        throw std::runtime_error("Can not open the file " + NPC_Quest);
+    }
+    int complete;
+    fileIn >> complete;
+
+    if(complete == 1) // true (had clear the map)
+    {
+        std::cout << "You have already played this quest map today\n";
+    }
+    else 
+    {
+        int round, size;
+        fileIn >> round >> size;
+        std::string name;
+        std::getline(fileIn, name);
+
+        std::queue<NPC*> npc;
+        for(int i = 0; i < size; i++)
+        {
+            if(name == "spider")
+            {
+                npc.push(new Spider());
+            }    
+        }
+    }
+
+    fileIn.close();
+}
+
+void Game::ClearMapStart(std::queue<NPC*> &npc)
+{
+    
 }

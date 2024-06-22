@@ -30,6 +30,20 @@ void Player::getPlayerFileInFo()
     {
         std::string ID;
         pFile >> ID;
+        std::string startWith = ID.substr(0, 2);
+        if(startWith == "GG")
+            armor[i] = new GodGlovers();
+        else if(startWith == "IC")
+            armor[i] = new IronCoat();
+        else if(startWith == "OW");
+            // armor[i] = new OmenWings();
+        
+        if(startWith == "GB")
+            weapon[i] = new GodBow();
+        else if(startWith == "MS")
+            weapon[i] = new MuramasaSword();
+        else if(startWith == "PI")
+            weapon[i] = new Pistol();   
     }
 
     pFile.close();    

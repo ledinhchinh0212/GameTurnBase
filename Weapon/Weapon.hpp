@@ -1,6 +1,7 @@
 #pragma once
 #include <utility>
 #include <string>
+#include "../Utility/Utility.hpp"
 
 class Weapon
 {
@@ -11,7 +12,7 @@ protected:
     double critRate;
     double lifeSteel;
 public:
-    Weapon() {}
+    Weapon();
 
     void setRangeDamage(std::pair<int, int> rangeDamage) { this->rangeDamage = rangeDamage; }
     void setWeight(int weight) { this->weight = weight; }
@@ -23,4 +24,6 @@ public:
     double getLifeSteel() const { return lifeSteel; }
     std::pair<int, int> getRangeDamge() const { return rangeDamage; }
     std::string getID() const { return ID; }
+
+    virtual double Damage() const;
 };

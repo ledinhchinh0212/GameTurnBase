@@ -2,6 +2,7 @@
 
 MuramasaSword::MuramasaSword() : Weapon()
 {
+    ID = "MS001";
     rangeDamage = {6, 15};
     weight = 3;
     critRate = 0.7659;

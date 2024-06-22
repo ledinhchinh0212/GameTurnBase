@@ -1,9 +1,15 @@
-#ifndef PLAYER_HPP
-#define PLAYER_HPP
+#pragma once
 #include <string>
 #include <utility>
 #include "../Weapon/Weapon.hpp"
 #include "../Armor/Armor.hpp"
+#include "../Armor/GodGlovers.hpp"
+#include "../Armor/IronCoat.hpp"
+#include "../Armor/OmenWings.hpp"
+#include "../Weapon/GodBow.hpp"
+#include "../Weapon/MuramasaSword.hpp"
+#include "../Weapon/Pistol.hpp"
+#include "../Utility/Utility.hpp"
 
 class Entity
 {
@@ -38,6 +44,6 @@ public:
     void setCritRate(double critRate) { this->critRate = critRate; }
     void setLifeSteel(double lifeSteel) { this->lifeSteel = lifeSteel; }
     void setLevel(double level) { this->level = level; }
-};
 
-#endif
+    virtual double Damage() const;
+};
