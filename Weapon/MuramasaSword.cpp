@@ -1,6 +1,6 @@
 #include "MuramasaSword.hpp"
 
-MuramasaSword::MuramasaSword()
+MuramasaSword::MuramasaSword() : Weapon()
 {
     rangeDamage = {6, 15};
     weight = 3;

@@ -1,6 +1,6 @@
 #include "GodBow.hpp"
 
-GodBow::GodBow()
+GodBow::GodBow() : Weapon()
 {
     rangeDamage = {2, 5};
     weight = 0;

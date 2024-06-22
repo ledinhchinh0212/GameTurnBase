@@ -1,6 +1,6 @@
 #include "Pistol.hpp"
 
-Pistol::Pistol()
+Pistol::Pistol() : Weapon()
 {
     rangeDamage = {3, 7};
     weight = 0;
