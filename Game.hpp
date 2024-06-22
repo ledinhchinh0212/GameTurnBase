@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <climits>
 #include "Player.hpp"
 #include "Error/Error.hpp"
 
@@ -13,7 +14,7 @@ private:
     const char* playerFile;
 public:
     Game();
-    bool OutRange(int a, int b);
+    bool OutRange(int a = INT_MIN, int b = INT_MAX);
     int InitGame();
     bool SetUpPlayer(Player *player);
     int MenuStartGame();
