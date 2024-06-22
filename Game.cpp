@@ -39,6 +39,26 @@ bool Game::SetUpPlayer(Player *player)
         else std::cout << "The name can not be empty\n";
     }
     while(name.empty());
-    
+
     std::cout << "Nhap ten nguoi dung thanh cong\n";
+}
+
+int Game::MenuStartGame()
+{
+    std::cout << "1. Vuot Ai\n";
+    std::cout << "2. Map Can Quet\n";
+    std::cout << "3. Nhien Vu Hang Ngay\n";
+    std::cout << "4. Thong tin nguoi choi\n";
+    std::cout << "5. Thoat\n";
+
+    do
+    {
+        std::cin >> choose;
+        if(!OutRange(1, 5))
+        {
+            return choose;
+        }
+        else Error::ErrorConsole(INVALID_INPUT);
+    } while (OutRange(1, 5));
+    
 }

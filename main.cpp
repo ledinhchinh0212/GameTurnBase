@@ -16,6 +16,10 @@ int main(int argc, char** argv) {
 			game->SetUpPlayer(player);
 			// player->Show();
 		}
+		else if(choose == 2)
+		{
+			game->MenuStartGame();
+		}
 		else if(choose == 3)
 		{
 			break;

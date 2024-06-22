@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include "Player.hpp"
+#include "Error/Error.hpp"
 
 class Game
 {
@@ -15,4 +16,5 @@ public:
     bool OutRange(int a, int b);
     int InitGame();
     bool SetUpPlayer(Player *player);
+    int MenuStartGame();
 };
