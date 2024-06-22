@@ -3,4 +3,5 @@
 enum ErrorParam
 {
     INVALID_INPUT,
+    MESSAGE,
 };

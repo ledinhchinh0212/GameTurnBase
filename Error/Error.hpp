@@ -5,5 +5,5 @@
 class Error
 {
 public:
-    static void ErrorConsole(int);
+    static void ErrorConsole(int num, std::string others = "");
 };

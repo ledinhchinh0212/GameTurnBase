@@ -1,9 +1,16 @@
 #include "Error.hpp"
 
-void Error::ErrorConsole(int num)
+void Error::ErrorConsole(int num, std::string others)
 {
-    if(num == INVALID_INPUT)
+    if(others != "")
     {
-        std::cout << "Invalid Input\n";
+        if(num == INVALID_INPUT)
+        {
+            std::cout << "Invalid Input\n";
+        }
+    }
+    else 
+    {
+        std::cout << others << "\n";
     }
 }
