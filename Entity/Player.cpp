@@ -51,13 +51,38 @@ void Player::getPlayerFileInFo()
 
 void Player::Show()
 {
-    std::cout << name << "\n";
-    std::cout << HP << "\n";
-    std::cout << rangeDamage.first << " " << rangeDamage.second << "\n";
-    std::cout << attackSpeed << "\n";
-    std::cout << critRate << "\n";
-    std::cout << lifeSteel << "\n";
-    std::cout << level << "\n";
+    std::cout << "Name: " << name << "\n";
+    std::cout << "Level: " << (int)level << "\n";
+    std::cout << "Max HP: " <<  HP << "\n";
+    std::cout << "Range Damage: " << rangeDamage.first << " " << rangeDamage.second << "\n";
+    std::cout << "Attack Speed: " << attackSpeed << "\n";
+    std::cout << "Crit Rate: " << critRate << "\n";
+    std::cout << "Life Steel: " << lifeSteel << "\n";
+    std::cout << std::endl;
+
+    std::cout << "Weapon:\n";
+    bool isWeapon = false;
+    for(int i = 0; i < MAX; i++)
+    {
+        if(weapon[i] != nullptr)
+        {
+            std::cout << "\t" << weapon[i]->getID() << " " << weapon[i]->getName() << "\n";
+            isWeapon = true;
+        }
+    }
+    if(!isWeapon) std::cout << "\tPlayer has no any weapon yet\n";
+
+    bool isArmor = false;
+    std::cout << "\nArmor:\n";
+    for(int i = 0; i < MAX; i++)
+    {
+        if(armor[i] != nullptr)
+        {
+            std::cout << "\t" << armor[i]->getID() << " " << armor[i]->getName() << "\n";
+            isArmor = true;
+        }
+    }
+    if(!isArmor) std::cout << "\tPlayer has no any armor yet\n";
 }
 
 void Player::ChangePropertyPlayer(int enumPlayer, std::string property)
@@ -106,4 +131,39 @@ void Player::VisibleName()
         std::cout << "The player has not a name\n";
     }
     else std::cout << name << "\n";
+}
+
+void Player::WriteFilePlayer()
+{
+    const std::string playerFile = "playerFile.txt";
+    std::ofstream fileP(playerFile, std::ofstream::trunc);
+    if(!fileP)
+    {
+        fileP.close();
+        throw std::runtime_error("Can not open the file " + playerFile);
+    }
+    fileP << name << "\n";
+    fileP << HP << "\n";
+    fileP << rangeDamage.first << " " << rangeDamage.second << "\n";
+    fileP << attackSpeed << "\n";
+    fileP << critRate << "\n";
+    fileP << lifeSteel << "\n";
+    fileP << level << "\n";
+    int count = 0;
+    for(int i = 0; i < MAX; i++)
+    {
+        if(armor[i] != nullptr)
+            count++;
+        if(weapon[i] != nullptr)
+            count++;
+    }
+    fileP << count << "\n";
+    for(int i = 0; i < MAX; i++)
+    {
+        if(armor[i] != nullptr)
+            fileP << armor[i]->getID() << "\n";
+        if(weapon[i] != nullptr)
+            fileP << weapon[i]->getID() << "\n";
+    }
+    fileP.close();
 }

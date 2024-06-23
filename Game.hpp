@@ -14,6 +14,7 @@
 #include "Entity/NPC.hpp"
 #include "Entity/Spider.hpp"
 #include "Entity/Entity.hpp"
+#include "Entity/Slime.hpp"
 
 class Game
 {
@@ -31,10 +32,12 @@ public:
     void SetUpPlayer(Player *player);
     int MenuStartGame();
     
-    void ClearMapCheckFile();
-    void ClearMapStart(std::queue<NPC*>&);
+    void ClearMapCheckFile(Player*&);
+    void ClearMapStart(Player*&, std::queue<NPC*>&);
 
     void CountTime(int seconds);
 
-    void GameStart(std::queue<NPC*>&);
+    void GameStart(Player*&, std::queue<NPC*>&);
+
+    bool isEnoughLevelToPlay(Player *player, NPC *npc);
 };

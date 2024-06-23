@@ -22,3 +22,13 @@ std::string FormatTime(int seconds)
     ss << seconds % 60;
     return ss.str();
 }
+
+void TypeToContinue(int flag)
+{
+    std::cout << "Enter any key to exit\n";
+    char anyKey = _getch();
+    if(flag == DELETE)
+    {
+        system("cls");
+    }
+}

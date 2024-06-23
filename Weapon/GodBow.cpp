@@ -3,6 +3,7 @@
 GodBow::GodBow() : Weapon()
 {
     ID = "GB001";
+    name = "GodBow";
     rangeDamage = {2, 5};
     weight = 0;
     critRate = 0.3931;

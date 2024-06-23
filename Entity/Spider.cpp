@@ -3,10 +3,10 @@
 Spider::Spider() : NPC()
 {
     levelRequest = 0;
-    Exp = 0.201405;
+    exp = 0.201405;
 
     name = "Spider";
-    HP = 10;
+    HP = 30;
     rangeDamage = {3, 3};
     attackSpeed = 1;
     critRate = 0.25;

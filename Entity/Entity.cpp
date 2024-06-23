@@ -1,6 +1,6 @@
 #include "Entity.hpp"
 
-Entity::Entity() : MAX(30), attackSpeed(1)
+Entity::Entity() : MAX(30), attackSpeed(1), name("")
 {
     this->weapon = new Weapon*[MAX];
     this->armor = new Armor*[MAX];
@@ -34,7 +34,10 @@ double Entity::Damage() const
 
     for(int i = 0; i < MAX; i++)
     {
-        damageRandom += weapon[i]->Damage();
+        if(weapon[i] != nullptr)
+        {
+            damageRandom += weapon[i]->Damage();
+        }
     }
 
     if(RandomDouble(critRate)) // crit rate effect
@@ -47,4 +50,21 @@ double Entity::Damage() const
 bool Entity::CheckDead() const
 {
     return HP <= 0;
+}
+
+double Entity::ReturnDamage() const
+{
+    return Damage() * attackSpeed;
+}
+
+bool Entity::isLifeSteel() const 
+{
+    for(int i = 0; i < MAX; i++)
+    {
+        if(weapon[i] != nullptr && weapon[i]->LifeSteel())
+        {
+            return true;
+        }
+    }
+    return false;
 }

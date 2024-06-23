@@ -34,6 +34,7 @@ bool Game::InRange(int a, int b)
 
 void Game::SetUpPlayer(Player *player)
 {
+    std::cout << "Type your ingame:\n";
     std::string name;
     do 
     {
@@ -42,11 +43,11 @@ void Game::SetUpPlayer(Player *player)
         {
            player->ChangePropertyPlayer(NAME, name);
         }
-        else Error::ErrorConsole(MESSAGE, "The name can not be empty");
+        else ErrorNoti::ErrorConsole(MESSAGE, "The name can not be empty");
     }
     while(name.empty());
 
-    std::cout << "Nhap ten nguoi dung thanh cong\n";
+    std::cout << "\nThe player's name has been set as \'" << name << "\'\n";
 }
 
 int Game::MenuStartGame()
@@ -65,11 +66,14 @@ int Game::MenuStartGame()
         {
             return choose;
         }
-        else Error::ErrorConsole(INVALID_INPUT);
+        else ErrorNoti::ErrorConsole(INVALID_INPUT);
     } while (OutRange(1, 5));
 }
 
-void Game::ClearMapCheckFile()
+std::atomic<bool> running(true);
+bool turnP = true;
+
+void Game::ClearMapCheckFile(Player *&player)
 {
     std::ifstream fileIn(NPC_Quest);
     if(!fileIn)
@@ -89,31 +93,106 @@ void Game::ClearMapCheckFile()
         int round, size;
         fileIn >> round >> size;
         std::string name;
-        std::getline(fileIn, name);
+        std::getline(fileIn >> std::ws, name);
 
         std::queue<NPC*> npc;
         for(int i = 0; i < size; i++)
         {
             if(name == "spider")
-            {
                 npc.push(new Spider());
-            }    
+            if(name == "slime")
+                npc.push(new Slime());
         }
-        ClearMapStart(npc); 
+        running = true;
+        turnP = true;
+        ClearMapStart(player, npc); 
     }
 
     fileIn.close();
 }
 
-std::atomic<bool> running(true);
-
-void Game::GameStart(std::queue<NPC*>& npc)
+void Game::GameStart(Player *&player, std::queue<NPC*>& npcs)
 {
-   while(running)
-   {
-       std::cout << "running\n";
-       std::this_thread::sleep_for(std::chrono::milliseconds(250));
-   }
+    int round = 1;
+    while(running)
+    {
+        if(!npcs.empty())
+        {
+            NPC *npc = npcs.front();
+
+            if(!isEnoughLevelToPlay(player, npc))
+            {
+                std::cout << "Your level is not enough to fight this npc\n";
+                running = false;
+            }
+            else 
+            {
+                if(turnP) // player's turn
+                {
+                    double damage = player->ReturnDamage();
+                    npc->setHP(npc->getHP() - damage);
+                    if(player->isLifeSteel())
+                    {
+                        player->setHP(player->getHP() + damage);
+	                   	if(player->getHP() >= player->getMaxHp())
+	                   	{
+	                       	player->setHP(player->getMaxHp());
+	               		} 
+                    }
+                }
+                else
+                {
+                    double damage = npc->ReturnDamage();
+                    player->setHP(player->getHP() - damage);
+                    if(npc->isLifeSteel())
+                    {
+                        npc->setHP(npc->getHP() + damage);
+                        if(npc->getHP() >= npc->getMaxHp())
+                        {
+                            npc->setHP(npc->getMaxHp());
+                        }
+                    }
+                } 
+                turnP = !turnP;
+
+                std::cout << player->getName() << ": ";
+                if(player->getHP() <= 0) 
+                    std::cout << "DIE";
+                else std::cout << player->getHP();
+                std::cout << "/" << player->getMaxHp() << "\n";
+                
+                std::cout << npc->getName() << ": ";
+                if(npc->getHP() <= 0) 
+                    std::cout << "DIE";
+                else std::cout << npc->getHP();
+                std::cout << "/" << npc->getMaxHp() << "\n";
+                
+                if(player->getHP() <= 0)
+                {
+                    std::cout << "You are lose !\n";
+                    running = false;
+                }
+                else if(npc->getHP() <= 0) 
+                {
+                    npcs.pop();
+                    player->setLevel(player->getLevel() + npc->getExp() + npc->getExp() * round * 0.10212);
+                    delete npc;
+                    std::cout << "\n\nNew round\n\n";
+                }
+            }
+        }
+        else 
+        {
+            if(player->getHP() > 0)
+            {
+                std::cout << "You won the map\n";
+            }
+            else std::cout << "loading?\n";
+            std::cout << "\n";
+            running = false;
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(1011)); 
+    }
 }
 
 void Game::CountTime(int seconds)
@@ -127,11 +206,16 @@ void Game::CountTime(int seconds)
     running = false;
 }
 
-void Game::ClearMapStart(std::queue<NPC*> &npc)
+void Game::ClearMapStart(Player *&player, std::queue<NPC*> &npc)
 {
     std::thread countTimeThread(Game::CountTime, this, 90);
-    std::thread gameStartThread(Game::GameStart, this, std::ref(npc));
+    std::thread gameStartThread(Game::GameStart, this, std::ref(player), std::ref(npc));
 
     countTimeThread.join();
     gameStartThread.join();
+}
+
+bool Game::isEnoughLevelToPlay(Player *player, NPC *npc)
+{
+    return player->getLevel() >= npc->getLevelRequest();
 }

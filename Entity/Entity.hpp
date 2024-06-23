@@ -23,7 +23,7 @@ protected:
     double level;
 
     const int MAX;
-    const double MAX_HP;
+    double MAX_HP;
 
     Weapon **weapon;
     Armor **armor;
@@ -39,6 +39,7 @@ public:
     double getCritRate() const { return critRate; }
     double getLifeSteel() const { return lifeSteel; }
     double getLevel() const { return level; }
+    double getMaxHp() const { return MAX_HP; }
     void setName(std::string name) { this->name = name; }
     void setHP(double HP) { this->HP = HP; }
     void setRangeDamage(std::pair<int, int> rangeDamage) { this->rangeDamage = rangeDamage; }
@@ -48,5 +49,7 @@ public:
     void setLevel(double level) { this->level = level; }
 
     virtual double Damage() const;
+    virtual double ReturnDamage() const;
     bool CheckDead() const;
+    bool isLifeSteel() const;
 };

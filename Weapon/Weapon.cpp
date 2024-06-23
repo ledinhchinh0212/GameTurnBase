@@ -11,3 +11,8 @@ double Weapon::Damage() const
     }
     return damageRandom;
 }
+
+bool Weapon::LifeSteel() const 
+{
+    return RandomDouble(lifeSteel);
+}

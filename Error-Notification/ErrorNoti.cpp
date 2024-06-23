@@ -1,6 +1,6 @@
 #include "ErrorNoti.hpp"
 
-void Error::ErrorConsole(int num, std::string others)
+void ErrorNoti::ErrorConsole(int num, std::string others)
 {
     if(others != "")
     {

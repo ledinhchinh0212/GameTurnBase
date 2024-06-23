@@ -5,9 +5,11 @@ class NPC : public Entity
 {
 protected:
     int levelRequest;
-    double Exp;
+    double exp;
 public:
-    NPC() : Entity(), levelRequest(0), Exp(0) {};
+    NPC() : Entity(), levelRequest(0), exp(0) {};
     void setLevelRequest(int levelRequest) { this->levelRequest = levelRequest; }
     int getLevelRequest() const { return levelRequest; }
+    void setExp(double exp) { this->exp = exp; }
+    double getExp() const { return exp; }
 };

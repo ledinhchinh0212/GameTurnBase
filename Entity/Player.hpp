@@ -16,4 +16,6 @@ public:
     void Show();
     void ChangePropertyPlayer(int, std::string);
     void VisibleName();
+
+    void WriteFilePlayer();
 };
